@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import '@shopify/polaris/build/esm/styles.css';
+import { Frame } from '@shopify/polaris';
+
+import Topbar from './Components/Topbar';
+import Sidebar from './Components/Sidebar';
+import { useState } from 'react';
 
 function App() {
+  const [ mobilenavbtn, setmobilenavbtn] = useState(false);
+  const logo = {
+    width: 124,
+    topBarSource:
+      'https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-color.svg?6215648040070010999',
+    contextualSaveBarSource:
+      'https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-gray.svg?6215648040070010999',
+    url: '#',
+    accessibilityLabel: 'Jaded Pixel',
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+       <Frame
+       topBar={<Topbar state={mobilenavbtn} toggle={setmobilenavbtn} />}
+       logo={logo}
+       navigation={<Sidebar />}
+       showMobileNavigation={mobilenavbtn}
+       onNavigationDismiss={()=>{setmobilenavbtn(!mobilenavbtn)}}
+       >
+      
+      
+    </Frame>
+    </>
+
   );
 }
 
